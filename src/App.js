@@ -1,42 +1,43 @@
-import { useState, 
-  // useEffect 
-} from 'react'
 import './App.css';
-
+import NavBar from './components/NavBar/NavBar'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Home from './views/Home'
+import About from './views/About'
+import Contact from './views/Contact'
+import Product from './views/Product'
+import Products from './views/Products';
 
 
 const App = () => {
-  const [productos, setProductos] = useState([])
-  const [input, setInput] = useState('')
-
-  // useEffect(() => {
-  //   fetch('https://api.mercadolibre.com/sites/MLA/search?q=iphone')
-  //   .then( res => { return res.json()}).then( function (respuesta) {
-  //     setProductos(respuesta.results.slice(0, 10))
-  //   })
-  // }, [])
-
-
-  const handleClick = () => {
-    fetch(`https://api.mercadolibre.com/sites/MLA/search?q=${input}`)
-    .then( res => { return res.json()}).then( function (respuesta) {
-      setProductos(respuesta.results.slice(0, 10))
-    })
-  }
+  const products = [
+    { id: 1, name: 'iphone'},
+    { id: 2, name: 'samsung'}
+  ]
 
   return (
     <div className="App">
-      <div>
-        <input type="text" onChange={(event) => setInput(event.target.value)}/>
-        <button onClick={handleClick}>Buscar</button>
-      </div>
-      <ul>
-        { productos.map(prod => {
-          return <li style={{ color: 'white' }} key={prod.id}>{prod.title}</li>
-        })}
-      </ul>
+      <BrowserRouter>
+        <NavBar products={products}/>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
+          <Route path="/products">
+            <Products />
+          </Route>
+          <Route path="/product/:name">
+            <Product />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

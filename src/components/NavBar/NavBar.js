@@ -1,43 +1,15 @@
-import { useState, useEffect } from 'react'
 import './NavBar.css'
-import MiButton from '../Button/Button.js'
+import { NavLink, Link } from 'react-router-dom'
 
-
-const NavBar = ({bebida}) => {
-  const [plato, setPlato] = useState('')
-
-    useEffect(() => {
-      console.log('Pedido al mozo')
-      setPlato('Pastas')
-      
-      return () => {
-       console.log('propina al mozo')
-      }
-    }, [])
-
-    
-    useEffect(() => {
-      console.log('lavo el vaso')
-    }, [bebida])
-
-
-    console.log('El componente va a ser Renderizado')
+const NavBar = ({products}) => {
     
     return (
       <nav className='NavBar'>
-        <div className='LeftNav'>
-          <div className='NavOptionsLeft'>
-              <MiButton className='Option' label="Home"/>
-              <MiButton className='Option' label="About"/>            
-              <button className='Option'>Favourites</button>
-          </div>
-        </div>
-        <div className='RightNav'>
-          <div className='NavOptionsRight'>
-            <button className="Option">Singin</button>
-            <button className="Option">Singup</button>
-          </div>
-        </div>
+        <Link to="/" className="Option">LOGO</Link>
+        <NavLink to="/about" activeClassName="NavLink" className="Option">About</NavLink>
+        <NavLink to="/contact" activeClassName="NavLink" className="Option">Contact</NavLink>
+        <NavLink to="/products" activeClassName="NavLink" className="Option">Products</NavLink>
+        {products.map(cat => <NavLink key={cat.id} to={`/product/${cat.name}`} activeClassName="NavLink" className="Option">{cat.name}</NavLink>)}                        
       </nav>
     )
 }

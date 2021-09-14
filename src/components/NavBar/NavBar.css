@@ -9,37 +9,6 @@
 
   }
 
-  .NavOptionsLeft {
-    padding-left: 25px;
-    display: grid;
-    grid-template-columns: repeat(5, auto);
-    grid-gap: 50px;
-    list-style-type: none;
-  }
-
-  .NavOptionsRight {
-    padding-left: 25px;
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    grid-gap: 50px;
-    list-style-type: none;
-  }
-  
-  .LeftNav {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-  }
-
-  .RightNav {
-    display: flex;
-    padding: 0px 5px;
-    list-style-type: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-  }
-  
   .Option {
     background-color: black;
     color: white;
@@ -47,6 +16,9 @@
     border-radius: 25;
   }
 
+  .NavLink {
+    color :orange
+  }
 
 
 
