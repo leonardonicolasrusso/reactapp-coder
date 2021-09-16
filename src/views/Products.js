@@ -14,6 +14,7 @@ const getProducts = () => {
 //AQUI EMPIEZA EL COMPONENTE
 const Products = () => {
     const [products, setProducts] = useState([])
+ 
 
     useEffect(() => {
       const listProducts = getProducts()
@@ -23,12 +24,15 @@ const Products = () => {
       })
     }, [])
 
+
+
     if(products.length === 0) {
       return <h1>Loading</h1>
     }
     
     return (
       <div style={{alignItems: 'center'}}>
+
         <h1>Products</h1>
         <ItemList products={products}/>
       </div>
