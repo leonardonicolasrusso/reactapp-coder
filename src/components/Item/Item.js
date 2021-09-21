@@ -1,37 +1,28 @@
+import { Link } from 'react-router-dom'
+import './Item.css'
 
-const Item = ({ item }) => {
-    
-    const handleClick = (ev) => {
-        console.log(ev)
-        ev.stopPropagation()
-        console.log('click en el producto')
-    }
-
-    const handleOnKeyDown = ev => {
-        if(ev.key == 'a' || ev.key == 'e' || ev.key == 'i' || ev.key == 'o' || ev.key == 'u') {
-            ev.preventDefault()
-    
-        }else{
-          console.log(ev.key)
-        }
-    }
-  
-
-
-
-
-    if(!item) {
-        return <h1>Loading</h1>
-    }
-
-    return (
-        <div style={{width: '200px', backgroundColor: 'white'}} onClick={handleClick}>
-            <img style={{ width: '200px'}} src={item?.img} alt={item?.name}/>
-            <h3>{item?.name}</h3>
-            <p>precio: <strong>{item?.price}</strong></p>
-            <input onKeyDown={handleOnKeyDown}/>
-        </div>
+const Item = ({ product }) => {
+  return (
+    <div className="CardItem">
+      <div className="ContainerItem">
+        <h2 className="ItemHeader">
+            {product.name}
+        </h2>
+      </div>
+      <img src={product.img} alt={product.name} className="ItemImg"/>
+      <h6 className="Info">
+        {`Categoria: ${product.category} `}
+      </h6>
+      <h6 className="Info">
+        {`Precio: ${product.price} `}
+      </h6>
+      { product.quantity &&       
+        <h6 className="Info">
+          {`Cantidad a comprar: ${product.quantity} `}
+        </h6>
+      }
+      { !product.quantity && <Link to={`/item/${product.id}`} className="Button">Comprar</Link> }
+    </div>
     )
 }
-
 export default Item

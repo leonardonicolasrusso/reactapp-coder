@@ -1,26 +1,26 @@
-/*Desktop View*/
-  .NavBar {
-    display: flex;
-    background: transparent;
-    justify-content: space-around;
-    align-items: center;
-    height: 60px;
-    background: #18191F;
+.NavBar {
+  display: flex;
+  background: transparent;
+  justify-content: space-around;
+  align-items: center;
+  height: 60px;
+  background: wheat;
+}
 
-  }
+.Categories {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
-  .Option {
-    background-color: black;
-    color: white;
-    text-decoration: none;
-    border-radius: 25;
-  }
+.Option {
+  background-color: transparent;
+  color: #8C30F5;
+  text-decoration: none;
+  border-radius: 25;
+  margin: 0 50px
+}
 
-  .NavLink {
-    color :orange
-  }
-
-
-
-
-
+.NavLink {
+  color :rgb(255, 0, 0)
+}

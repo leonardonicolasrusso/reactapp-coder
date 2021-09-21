@@ -1,14 +1,15 @@
-import Item from '../Item/Item.js'
+import Item from "../Item/Item"
 
-const ItemList = ({ products }) => {
+const ItemList = ({products,categoryid}) => {
 
-    return (
-        <div onClick={() => console.log('click en item list')} style={{ backgroundColor: 'grey'}}>  
-            {products.map(prod => {
-                return <Item key={prod.id} item={prod}/>
-            })}
-        </div>
-    )
+  if(products.length === 0) {
+    return <h3>No hay productos</h3>
+  } 
+
+  return (
+    <ul className="list-group">
+      {products.map(product =><Item key={product.id} product={product}/>)}
+    </ul>
+  )
 }
-
 export default ItemList
