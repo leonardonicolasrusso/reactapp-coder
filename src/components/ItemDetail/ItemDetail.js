@@ -1,6 +1,11 @@
+import { useState, useContext } from 'react'
 import ItemCount from '../ItemCount/ItemCount'
+import {Link} from 'react-router-dom'
+import UserContext from '../../context/UserContext'
 
 const ItemDetail = ({ product, productsAdded, addProdFunction }) => {
+    const [count, setCount] = useState(0)
+    const {user} = useContext(UserContext)
 
     if(!product) {
         return <h3>{`Ese producto ya no existe`}</h3>
@@ -25,7 +30,13 @@ const ItemDetail = ({ product, productsAdded, addProdFunction }) => {
             </p>
             <p>{product.description}</p>
 
-            <ItemCount product={product} productsAdded={productsAdded} addProdFunction={addProdFunction} />
+            {
+            count === 0 && user
+                ? <ItemCount product={product} productsAdded={productsAdded} addProdFunction={addProdFunction} setCount={setCount} />
+                : user 
+                    ? <Link to='/cart'><button className="Button">Ir al carrito</button></Link>
+                    : <Link to='/login'><button className="Button">Login</button></Link>
+            }
         </div>
 
     )

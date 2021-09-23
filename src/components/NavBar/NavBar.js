@@ -2,11 +2,11 @@ import { useState, useEffect, useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import './NavBar.css'
 import CartWidget from '../CartWidget/CartWidget'
-import { UserContext } from '../../context/UserContext'
+import UserContext from '../../context/UserContext'
 
 const NavBar = ({ categories, cartProducts }) => {
   const [productQuantity, setProductQuantity] = useState(0)
-  const user = useContext(UserContext)
+  const {user, logout} = useContext(UserContext)
 
   useEffect(() => {
     if(cartProducts.length === 0) {
@@ -25,13 +25,23 @@ const NavBar = ({ categories, cartProducts }) => {
           <h3>MARKETapp</h3>
         </Link>
       </div>
-      {user && <div className="Categories">
+      <div className="Categories">
         {categories.map(category => <NavLink key={category.id} to={`/category/${category.id}`} className='Option' activeClassName="NavLink">{category.description}</NavLink>)}     
-      </div>}
+      </div>
       <div>
-        <Link to='/cart'>
-          <CartWidget quantity={productQuantity} />
-        </Link>
+        {
+          user 
+            ? <button onClick={logout}>Logout</button>
+            : <Link to='/login'><button>Login</button></Link>
+        }
+      </div>
+      <div>
+        {
+        (user && cartProducts.length > 0) &&
+          <Link to='/cart'>
+            <CartWidget quantity={productQuantity} />
+          </Link>
+        }
       </div>
 
     </nav>

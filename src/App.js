@@ -4,12 +4,12 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import NavBar from './components/NavBar/NavBar'
 import Cart from './components/Cart/Cart'
 import Notification from './components/Notification/Notification'
+import Login from './components/Login/Login'
+import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import './App.css'
 import { getCategories } from './products'
 import { NotificationContextProvider } from './context/NotificationContext'
-import { UserContext } from './context/UserContext'
-
 
 const App = () => {
   const [cartProducts, setCartProduct] = useState([])
@@ -25,9 +25,7 @@ const App = () => {
     <div className="App">
       <NotificationContextProvider>      
         <BrowserRouter>
-          <UserContext.Provider value={user}>
-            <NavBar categories={getCategories()} cartProducts={cartProducts}/> 
-          </UserContext.Provider> 
+            <NavBar categories={getCategories()} cartProducts={cartProducts}/>  
           <Notification />
             <Switch>
             <Route exact path='/'>
@@ -39,8 +37,11 @@ const App = () => {
               <Route path='/item/:itemid'>
                 <ItemDetailContainer productsAdded={cartProducts} addProdFunction={setCartProduct}/>
               </Route>
-              <Route path='/cart'>
+              <PrivateRoute path='/cart' user={user}>
                 <Cart productsAdded={cartProducts} addProdFunction={setCartProduct}/>
+              </PrivateRoute>
+              <Route path='/login'>
+                <Login/>
               </Route>
             </Switch>
         </BrowserRouter>

@@ -3,7 +3,7 @@ import {useState,
 } from 'react'
 import NotificationContext from '../../context/NotificationContext'
 
-const ItemCount = ({product, productsAdded, addProdFunction})=> {
+const ItemCount = ({product, productsAdded, addProdFunction, setCount})=> {
     const [quantity,setQuantity] = useState(0)
     const { setNotification } = useContext(NotificationContext)
 
@@ -23,7 +23,8 @@ const ItemCount = ({product, productsAdded, addProdFunction})=> {
         const newProduct = {
             ...product,
             quantity: quantity
-        } 
+        }
+        setCount(quantity) 
         addProdFunction([...productsAdded, newProduct])
         setNotification('success', `${product.name} ha sido agregado al carrito`)
     }

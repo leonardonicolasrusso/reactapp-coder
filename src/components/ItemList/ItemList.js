@@ -1,6 +1,7 @@
+import React from 'react'
 import Item from "../Item/Item"
 
-const ItemList = ({products,categoryid}) => {
+const ItemList = ({products}) => {
 
   if(products.length === 0) {
     return <h3>No hay productos</h3>
@@ -12,4 +13,4 @@ const ItemList = ({products,categoryid}) => {
     </ul>
   )
 }
-export default ItemList
+export default React.memo(ItemList)
