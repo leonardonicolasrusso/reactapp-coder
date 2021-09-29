@@ -1,7 +1,11 @@
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import './Item.css'
+import CartContext from '../../context/CartContext'
 
 const Item = ({ product }) => {
+  const { removeProduct } = useContext(CartContext)
+
   return (
     <div className="CardItem">
       <div className="ContainerItem">
@@ -21,7 +25,9 @@ const Item = ({ product }) => {
           {`Cantidad a comprar: ${product.quantity} `}
         </h6>
       }
-      { !product.quantity && <Link to={`/item/${product.id}`} className="Button">Comprar</Link> }
+      { product?.quantity 
+          ? <button onClick={() => removeProduct(product.id)} className="Button">Quitar del carrito</button> 
+          : <Link to={`/item/${product.id}`} className="Button">Comprar</Link> }
     </div>
     )
 }

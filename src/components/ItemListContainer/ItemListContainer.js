@@ -33,11 +33,16 @@ const ItemListContainer = ()=> {
                 }) 
                 setProducts(products)
             }).catch((error) => {
-                console.log('Error searching intems', error)
+                console.log('Error searching items', error)
             }).finally(() => {
                 setLoading(false)
             })
-        }      
+        }
+        
+        return (() => {
+            setLoading(true)
+            setProducts([])
+        })
     }, [categoryid])
 
     return (

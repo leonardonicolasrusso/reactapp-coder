@@ -13,7 +13,7 @@ export const NotificationContextProvider = ({children}) => {
             setMessage('')
         }, 3000)
     }
-    console.log(children)
+
     return (
         <Context.Provider 
             value={{

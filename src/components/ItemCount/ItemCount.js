@@ -1,11 +1,24 @@
 import {useState, 
-     useContext
+     useContext,
+     useEffect
 } from 'react'
 import NotificationContext from '../../context/NotificationContext'
+import CartContext from '../../context/CartContext'
 
-const ItemCount = ({product, productsAdded, addProdFunction, setCount})=> {
-    const [quantity,setQuantity] = useState(0)
+const ItemCount = ({product, setCount})=> {
+    const [quantity, setQuantity] = useState(0)
     const { setNotification } = useContext(NotificationContext)
+    const { addItem, isInCart, getProduct } = useContext(CartContext)
+
+    useEffect(() => {
+        if(isInCart(product.id)) {
+           const oldQuantity = getProduct(product.id)?.quantity
+           setQuantity(oldQuantity)
+        }
+        return(() => {
+            setQuantity(0)
+        })
+    }, [product, getProduct, isInCart])
 
     const onAdd = () => {
         if(quantity < product.stock) {
@@ -20,12 +33,8 @@ const ItemCount = ({product, productsAdded, addProdFunction, setCount})=> {
     }
 
     const onAddtoCart = () =>{
-        const newProduct = {
-            ...product,
-            quantity: quantity
-        }
+        addItem(product, quantity)
         setCount(quantity) 
-        addProdFunction([...productsAdded, newProduct])
         setNotification('success', `${product.name} ha sido agregado al carrito`)
     }
 

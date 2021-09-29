@@ -13,7 +13,6 @@ const ItemDetailContainer = ({ productsAdded, addProdFunction }) => {
     useEffect(() => {
         setLoading(true)
         getDoc(doc(db, 'items' , itemid)).then((querySnapshot) => {
-            console.log({id: querySnapshot.id, ...querySnapshot.data()})
             const product = { id: querySnapshot.id, ...querySnapshot.data()}
             setProduct(product)
         }).catch((error) => {
@@ -22,6 +21,7 @@ const ItemDetailContainer = ({ productsAdded, addProdFunction }) => {
             setLoading(false)
         })
         return (() => {
+            setLoading(true)
             setProduct(undefined)
         })
     },[itemid])
